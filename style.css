@@ -3,14 +3,77 @@
     padding: 0;
 }
 
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+
 #table td {
     border: 1px solid;
     width: 100px;
     height: 100px;
+    z-index: 1;
+
 }
 
 .image {
     width: 100%;
     min-height: 100%;
     display: grid;
+}
+
+.tablewrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.turn {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+#winner {
+    position: absolute;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    width: 70%;
+    height: 70%;
+    z-index: 2;
+    left: -50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    align-items: center;
+    border-radius: 1%;
+    transition: all 1000ms ease-in-out;
+}
+
+#winnertxt {
+    color: white;
+    font-size: 500%;
+    text-align: center;
+    margin: 5% 0;
+}
+
+#restartbtn {
+	box-shadow:inset 0px -3px 7px 0px #29bbff;
+	background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+	background-color:#2dabf9;
+	border-radius:3px;
+	border:1px solid #0b0e07;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:9px 23px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #263666;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 5% 0;
+
 }

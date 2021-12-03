@@ -8,23 +8,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <table id="table">
-        <tr>
-            <td id="td1"></td>
-            <td id="td2"></td>
-            <td id="td3"></td>
-        </tr>
-        <tr>
-            <td id="td4"></td>
-            <td id="td5"></td>
-            <td id="td6"></td>
-        </tr>
-        <tr>
-            <td id="td7"></td>
-            <td id="td8"></td>
-            <td id="td9"></td>
-        </tr>
-    </table>
+    <div id="winner">
+        <div id="winnercenter">
+            <p id="winnertxt">Winner : X</p>
+            <button id="restartbtn" onclick="res()">Restart</button>    
+        </div>
+    </div>
+    <div class="tablewrap" id="tablewrap">
+        <p class="turn" id="turn">Turn : X </p>
+        <table id="table">
+            <tr>
+                <td id="td1" class="firstrow firstcol diagonallr"></td>
+                <td id="td2" class="firstrow secondcol"></td>
+                <td id="td3" class="firstrow thirdcol diagonalrl"></td>
+            </tr>
+            <tr>
+                <td id="td4" class="secondrow firstcol"></td>
+                <td id="td5" class="secondrow secondcol diagonallr diagonalrl"></td>
+                <td id="td6" class="secondrow thirdcol"></td>
+            </tr>
+            <tr>
+                <td id="td7"  class="thirdrow firstcol diagonalrl"></td>
+                <td id="td8"  class="thirdrow secondcol"></td>
+                <td id="td9"  class="thirdrow thirdcol diagonallr"></td>
+            </tr>
+        </table>
+    </div>
+    
     <script src="app.js"></script>
 </body>
 </html>
