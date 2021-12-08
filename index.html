@@ -8,30 +8,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="settingsbtn"><img src="settings.svg" alt="" class="settingsimg"></div>
+    <div class="settings">
+        <p class="backgroundtxt">Change Background</p>
+        <div class="closesettings" id="close"><img src="close.svg" alt="" class="closesvg"></div>
+        <div class="backgrounds">
+            <div id="backg1" class="backgroundbtn"></div>
+            <div id="backg2" class="backgroundbtn"></div>
+            <div id="backg3" class="backgroundbtn"></div>
+            <div id="backg4" class="backgroundbtn"></div>
+            <div id="backg5" class="backgroundbtn"></div>
+            <div id="backg6" class="backgroundbtn"></div>
+        </div>
+    </div>
     <div id="winner">
         <div id="winnercenter">
             <p id="winnertxt">Winner : X</p>
-            <button id="restartbtn" onclick="res()">Restart</button>    
+            <button id="restartbtn" onclick="res()">Play Again</button>    
         </div>
     </div>
     <div class="tablewrap" id="tablewrap">
         <p class="turn" id="turn">Turn : X </p>
         <table id="table">
-            <tr>
-                <td id="td1" class="firstrow firstcol diagonallr"></td>
-                <td id="td2" class="firstrow secondcol"></td>
-                <td id="td3" class="firstrow thirdcol diagonalrl"></td>
-            </tr>
-            <tr>
-                <td id="td4" class="secondrow firstcol"></td>
-                <td id="td5" class="secondrow secondcol diagonallr diagonalrl"></td>
-                <td id="td6" class="secondrow thirdcol"></td>
-            </tr>
-            <tr>
-                <td id="td7"  class="thirdrow firstcol diagonalrl"></td>
-                <td id="td8"  class="thirdrow secondcol"></td>
-                <td id="td9"  class="thirdrow thirdcol diagonallr"></td>
-            </tr>
         </table>
     </div>
     

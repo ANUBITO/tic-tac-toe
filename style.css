@@ -8,6 +8,11 @@ html, body {
     min-height: 100%;
 }
 
+body {
+    background-size: cover;
+    background-position: center;
+}
+
 #table td {
     border: 1px solid;
     width: 100px;
@@ -76,4 +81,56 @@ html, body {
     transform: translateX(-50%);
     margin: 5% 0;
 
+}
+
+.settings {
+    width: 100%;
+    min-height: 100%;
+    background-color: white;
+    display: none;
+}
+
+.backgrounds {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.backgroundbtn {
+    width: 45%;
+    height: 300px;
+    margin: 1% 0;
+    background-size: cover;
+}
+
+.backgroundtxt {
+    font-size: 400%;
+    text-align: center;
+}
+
+.closesettings {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.closesvg {
+    width: 100%;
+}
+
+.settingsbtn {
+    width: 30px;
+    display: grid;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    place-items: center;
+    cursor: pointer;
+}
+
+.settingsimg {
+    width: 80%;
+    height: 80%;
 }

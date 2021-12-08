@@ -6,21 +6,80 @@ doSome();
 */
 // @დინამიური ცვლადის შექმნა
 // console.log(window[part1+part2]);
-var starttime = performance.now();
-  for (var i = 1; i <= 9; i++) {
-    this["td" + i] = document.getElementById('td' + i);
-  }
-  
+for (let i = 1; i <= 6; i++) {
+  document.getElementById('backg'+i).style.backgroundImage = `url('wallpapers/${i}.jpg')`;
+  document.getElementById('backg'+i).addEventListener('click', function () {
+    document.body.style.backgroundImage = `url('wallpapers/${i}.jpg')`;
+    document.querySelector('.settings').style.display = 'none';
+    document.querySelector('.tablewrap').style.display = 'block';
+    document.querySelector('.settingsbtn').style.display = 'block';
+  })
+  document.getElementById('backg'+i).style.cursor = 'pointer';
+}
+
+document.querySelector('.settingsbtn').addEventListener('click', function() {
+  document.querySelector('.settingsbtn').style.display = 'none';
+  document.querySelector('.tablewrap').style.display = 'none';
+  document.querySelector('.settings').style.display = 'block';
+})
+
+document.getElementById('close').addEventListener('click', function() {
+  document.querySelector('.settings').style.display = 'none';
+  document.querySelector('.tablewrap').style.display = 'block';
+  document.querySelector('.settingsbtn').style.display = 'block';
+})
+
+  var size = 3;
+
+  var tbody = document.createElement("tbody");
+  tbody.setAttribute('id', 'tbody');
+  var indx = 1;
+  var Turn;
   var TurnElement = document.getElementById('turn');
+
+  printtable(size);
+
+  function printtable(size) {
+    indx = 1;
+    for (var i = 1; i <= size; i++) {
+      var row = document.createElement("tr");
   
-  for (let i = 1; i <= 9; i++) {
-    window['td' + i].addEventListener("click", function () {
-      testfun(i);
-    }, {
-      once: true
-    });
-    window['td' + i].style.cursor = 'pointer';
+      for (var j = 1; j <=size; j++) {
+        var cell = document.createElement("td");
+        cell.setAttribute('id', `td${indx}`);
+        row.appendChild(cell);
+        indx++;
+      }
+  
+      tbody.appendChild(row);
+    }
+    document.getElementById('table').appendChild(tbody);
+    events();
   }
+
+  function events() {
+    clicks = 0;
+    TurnElement.innerHTML = 'Turn : X';
+    Turn = 'x';
+    for (var i = 1; i <= (size * size); i++) {
+      this["td" + i] = document.getElementById('td' + i);
+    }
+    for (let i = 1; i <= (size * size); i++) {
+      window['td' + i].addEventListener("click", function () {
+        clicks++;
+        testfun(i);
+      }, {
+        once: true
+      });
+      window['td' + i].style.cursor = 'pointer';
+    }
+    define();
+  }
+
+  
+  
+  
+  
   
   var diagonal_l_to_r_x = 0;
   var diagonal_r_to_l_x = 0;
@@ -44,193 +103,124 @@ var starttime = performance.now();
   for (var i = 1; i <= 3; i++) {
     this["col_" + i + '_o'] = 0;
   }
-  
-  var Turn = 'x';
-  
+    
   function testfun(index) {
-    console.log(index);
     window['td' + index].style.cursor = 'default';
+    window['td' + index].setAttribute("value", Turn);
   
     if (Turn == 'x') {
       window['td' + index].innerHTML = '<img src="x.svg" class="image">';
-      testplus('x', index);
+      tst(index);
       Turn = 'o';
       TurnElement.innerHTML = 'Turn : O';
     } else {
       window['td' + index].innerHTML = '<img src="o.svg" class="image">';
-      testplus('o', index);
+      tst(index);
       Turn = 'x';
       TurnElement.innerHTML = 'Turn : X';
     }
-  
-  
+
   }
   
-  function testplus(turn, index) {
-    if (index == 1) {
-      window['diagonal_l_to_r_' + turn]++;
-      window['row_1_' + turn]++;
-      window['col_1_' + turn]++;
-    }
-    if (index == 2) {
-      window['row_1_' + turn]++;
-      window['col_2_' + turn]++;
-    }
-    if (index == 3) {
-      window['row_1_' + turn]++;
-      window['col_3_' + turn]++;
-      window['diagonal_r_to_l_' + turn]++;
-    }
-    if (index == 4) {
-      window['col_1_' + turn]++;
-      window['row_2_' + turn]++;
-    }
-    if (index == 5) {
-      window['col_2_' + turn]++;
-      window['row_2_' + turn]++;
-      window['diagonal_r_to_l_' + turn]++;
-      window['diagonal_l_to_r_' + turn]++;
-    }
-    if (index == 6) {
-      window['col_3_' + turn]++;
-      window['row_2_' + turn]++;
-    }
-    if (index == 7) {
-      window['col_1_' + turn]++;
-      window['row_3_' + turn]++;
-      window['diagonal_r_to_l_' + turn]++;
-    }
-    if (index == 8) {
-      window['row_3_' + turn]++;
-      window['col_2_' + turn]++;
-    }
-    if (index == 9) {
-      window['row_3_' + turn]++;
-      window['col_3_' + turn]++;
-      window['diagonal_l_to_r_' + turn]++;
-    }
-  
-    WinCheck();
+function define() {
+  firstrow = [];
+  for (let i = 1; i <= size; i++) {
+    firstrow.push(window['td'+i]);
   }
   
-  var firstrow = document.querySelectorAll('.firstrow');
-  var secondrow = document.querySelectorAll('.secondrow');
-  var thirdrow = document.querySelectorAll('.thirdrow');
+  secondrow = [];
+  for (let i = 1; i <= size; i++) {
+    secondrow.push(window['td'+(size + i)]);
+  }
+  thirdrow = [];
+  for (let i = 1; i <= size; i++) {
+    thirdrow.push(window['td'+((size * 2) + i)]);
+  }
   
-  var firstcol = document.querySelectorAll('.firstcol');
-  var secondcol = document.querySelectorAll('.secondcol');
-  var thirdcol = document.querySelectorAll('.thirdcol');
+  firstcol = [];
+  var ind = 1;
+  for (let i = 1; i <= size; i++) {
+    firstcol.push(window['td'+ind]);
+    ind += size;
+  }
   
-  var diagonalrl = document.querySelectorAll('.diagonalrl');
-  var diagonallr = document.querySelectorAll('.diagonallr');
+  secondcol = [];
+  var ind = 2;
+  for (let i = 1; i <= size; i++) {
+    secondcol.push(window['td'+ind]);
+    ind += size;
+  }
+  thirdcol = [];
+  var ind = 3;
+  for (let i = 1; i <= size; i++) {
+    thirdcol.push(window['td'+ind]);
+    ind += size;
+  }
+  
+  
+  diagonalrl = [];
+  var ind = 3;
+  for (let i = 1; i <= size; i++) {
+    diagonalrl.push(window['td'+ind]);
+    ind += (size - 1);
+  }
+
+  diagonallr = [];
+  var ind = 1;
+  for (let i = 1; i <= size; i++) {
+    diagonallr.push(window['td'+ind]);
+    ind += (size + 1);
+  }
+  index();
+}
+  
+  
   
   var winnerwindow = document.getElementById('winner');
   var winnertxt = document.getElementById('winnertxt');
 
+  function index() {
+    index1 = [firstcol, firstrow, diagonallr];
+    index2 = [firstrow, secondcol];
+    index3 = [firstrow, thirdcol, diagonalrl];
+    index4 = [secondrow, firstcol];
+    index5 = [secondrow, secondcol, diagonallr, diagonalrl];
+    index6 = [secondrow, thirdcol];
+    index7 = [firstcol, thirdrow, diagonalrl];
+    index8 = [thirdrow, secondcol];
+    index9 = [thirdcol, thirdrow, diagonallr];
+  }
+
+  
+
+  
+  var xtest = (currentValue) => currentValue.getAttribute('value') == 'x';
+  var otest = (currentValue) => currentValue.getAttribute('value') == 'o';
+
+  function tst(ind) {
+    window['index'+ind].forEach((Element) => {
+        if (Element.every(xtest) == true) {
+          win('X');
+        } else if (Element.every(otest) == true) {
+          win('O');
+        } else if (clicks == 9) {
+          win('None');
+        }
+      });
+  }
+
   function win(winner) {
       winnerwindow.style.display = 'grid';
-      winnertxt.innerHTML = `Winner : ${winner}`; 
-      document.getElementById('tablewrap').innerHTML = '';
+      winnertxt.innerHTML = `Winner : ${winner}`;
+      document.getElementById('tablewrap').style.display = 'none';
       setTimeout(() => {
       winnerwindow.style.left = '50%';
       }, 500); 
   }
-  
-  function WinCheck() {
-    if (diagonal_l_to_r_x == 3 || diagonal_l_to_r_o == 3) {
-      if (diagonal_l_to_r_x == 3) {
-        win('X');
-      } else {
-        win('O');
-      }
-      diagonallr.forEach(Element => {
-        Element.style.backgroundColor = 'red';
-      })
-    }
-  
-    if (diagonal_r_to_l_x == 3 || diagonal_r_to_l_o == 3) {
-      if (diagonal_r_to_l_x == 3) {
-        win('X');
-      } else {
-        win('O');
-      }
-      diagonalrl.forEach(Element => {
-        Element.style.backgroundColor = 'red';
-      })
-  
-    }
-  
-    if (row_1_x == 3 || row_1_o == 3) {
-      if (row_1_x == 3) {
-        win('X');
-      } else {
-        win('O');
-      }
-      firstrow.forEach(Element => {
-        Element.style.backgroundColor = 'red';
-      })
-  
-    }
-  
-    if (col_1_x == 3 || col_1_o == 3) {
-      if (col_1_x == 3) {
-        win('X');
-      } else {
-        win('O');
-      }
-      firstcol.forEach(Element => {
-        Element.style.backgroundColor = 'red';
-      })
-    }
-  
-    if (row_2_x == 3 || row_2_o == 3) {
-      if (row_2_x == 3) {
-        win('X');
-      } else {
-        win('O');
-      }
-      secondrow.forEach(Element => {
-        Element.style.backgroundColor = 'red';
-      })
-    }
-  
-    if (col_2_x == 3 || col_2_o == 3) {
-      if (col_2_x == 3) {
-        win('X');
-      } else {
-        win('O');
-      }
-      secondcol.forEach(Element => {
-        Element.style.backgroundColor = 'red';
-      })
-    }
-  
-    if (row_3_x == 3 || row_3_o == 3) {
-      if (row_3_x == 3) {
-        win('X');
-      } else {
-        win('O');
-      }
-      thirdrow.forEach(Element => {
-        Element.style.backgroundColor = 'red';
-      })
-    }
-
-    if (col_3_x == 3 || col_3_o == 3) {
-      if (col_3_x == 3) {
-        win('X');
-      } else {
-        win('O');
-      }
-      thirdcol.forEach(Element => {
-        Element.style.backgroundColor = 'red';
-      })
-    }
-  }
 
   function res() {
-    window.location.reload();
+    document.getElementById('tbody').innerHTML = '';
+    winnerwindow.style.display = 'none';
+    document.getElementById('tablewrap').style.display = 'block';
+    printtable(size);
   }
-
-var endtime = performance.now();
-console.log(`${endtime - starttime} miliseconds`);
